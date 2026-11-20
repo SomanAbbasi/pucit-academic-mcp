@@ -7,9 +7,12 @@ from langchain.mcp import MCPAdapter
 from langgraph.checkpoint.sqlite.aio import AsyncSqliteSaver
 
 from llm import llm
+from fastmcp import Client
 
 load_dotenv()
 MCP_URL = os.getenv("MCP_URL")
+FASTMCP_KEY = os.getenv("FASTMCP_KEY")
+server_target = Client(MCP_URL, auth=FASTMCP_KEY) if FASTMCP_KEY else MCP_URL
 
 
 
@@ -195,7 +198,7 @@ def make_safe_tools(tools):
 
 async def main():
     async with (
-        MCPAdapter(MCP_URL) as adapter,
+        MCPAdapter(server_target) as adapter,
         AsyncSqliteSaver.from_conn_string("chats.db") as memory,
     ):
         tools = await adapter.list_tools()

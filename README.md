@@ -1,35 +1,27 @@
-# PUCIT GPA & CGPA Assistant
+# PUCIT BS(CS) CGPA Guider — Assignment 3
 
-A conversational AI assistant for PUCIT BS(CS) students to calculate GPA, CGPA, required GPA, and view semester courses and credit hours.
+An AI-powered GPA and CGPA assistant for PUCIT BS(CS) students upgraded with **persistent SQLite memory**, **real-time streaming**, **remote MCP tool hosting**, and **graceful downtime handling**.
 
-## Setup
+---
 
-1. Create a virtual environment:
+## Submission Details
 
-```bash
-python -m venv venv
-```
+* **MCP Server URL:** `https://pucit-academic-mcp.fastmcp.app/mcp`
+* **MCP Server API Key:** `https://pucit-academic-mcp.fastmcp.app/mcp`
+* **GitHub Repository (Server Code):** https://github.com/SomanAbbasi/pucit-academic-mcp[cite: 3]
 
-2. Activate it on Windows:
+---
 
-```bash
-venv\Scripts\activate
-```
+## Project Structure
 
-3. Install dependencies:
-
-```bash
-pip install langchain langchain-groq python-dotenv streamlit
-```
-
-4. Create a `.env` file and add your Groq API key:
-
-```env
-GROQ_API_KEY=your_groq_api_key
-```
-
-5. Run the application:
-
-```bash
-streamlit run app.py
-```
+```text
+BCSF24M014_Assignment3/
+├── server/
+│   ├── server.py          # FastMCP server exposing all 7 CGPA tools
+│   ├── tools.py           # Plain Python functions for GPA/CGPA & PUCIT courses
+│   └── requirements.txt   # Server dependencies
+├── agent/
+│   ├── agent.py           # Async LangChain agent with MCPAdapter, SQLite memory & streaming
+│   ├── llm.py             # Groq LLM initialization
+│   └── .env               # API keys and MCP server URL (not committed to GitHub)
+└── README.md
